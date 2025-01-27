@@ -6,8 +6,6 @@ import { TourValues } from "./components/tour-form/useTourFormLogic";
 import appLogic from "./appLogic";
 const { Header, Content, Footer } = Layout;
 
-
-
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [tours, setTours] = useState<TourValues[]>([]);
@@ -20,15 +18,13 @@ const App: React.FC = () => {
     handleEditTour,
     handleDeleteTour,
     handleCancelEdit,
-    fetchTours
-  } = appLogic({setLoading, setTours, setEditingTour})
+    fetchTours,
+  } = appLogic({ setLoading, setTours, setEditingTour });
 
-  
   useEffect(() => {
     fetchTours();
     //eslint-disable-next-line
   }, []);
-
 
   return (
     <Layout style={{ minHeight: "100vh" }}>

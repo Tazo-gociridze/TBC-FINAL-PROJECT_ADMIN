@@ -19,23 +19,23 @@ export interface TourData {
   image_url?: string;
 }
 
-interface TourValues extends Omit<TourData, 'start_date' | 'end_date'> {
-    id?: string;
-    title: string;
-    description: string;
-    price: number;
-    start_date: Dayjs | null;
-    end_date: Dayjs | null;
-    image_url?: string;
-  }
-
-interface AppLogicProps {
-    setLoading: Dispatch<SetStateAction<boolean>>;
-    setTours: Dispatch<SetStateAction<TourValues[] >>;
-    setEditingTour: Dispatch<SetStateAction<TourValues | null>>;
+interface TourValues extends Omit<TourData, "start_date" | "end_date"> {
+  id?: string;
+  title: string;
+  description: string;
+  price: number;
+  start_date: Dayjs | null;
+  end_date: Dayjs | null;
+  image_url?: string;
 }
 
-const appLogic = ({setLoading, setTours, setEditingTour}:  AppLogicProps) => {
+interface AppLogicProps {
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setTours: Dispatch<SetStateAction<TourValues[]>>;
+  setEditingTour: Dispatch<SetStateAction<TourValues | null>>;
+}
+
+const appLogic = ({ setLoading, setTours, setEditingTour }: AppLogicProps) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -51,7 +51,7 @@ const appLogic = ({setLoading, setTours, setEditingTour}:  AppLogicProps) => {
               start_date: tour.start_date ? dayjs(tour.start_date) : null,
               end_date: tour.end_date ? dayjs(tour.end_date) : null,
             }))
-          : []
+          : [],
       );
     } catch (err: unknown) {
       console.error(err);
@@ -64,7 +64,6 @@ const appLogic = ({setLoading, setTours, setEditingTour}:  AppLogicProps) => {
       setLoading(false);
     }
   };
-
 
   const handleFormSubmit = async (values: TourValues, image?: File) => {
     setLoading(true);
@@ -148,7 +147,7 @@ const appLogic = ({setLoading, setTours, setEditingTour}:  AppLogicProps) => {
     handleEditTour,
     handleDeleteTour,
     handleCancelEdit,
-    fetchTours
+    fetchTours,
   };
 };
 

@@ -1,27 +1,25 @@
-import  { useEffect, useState } from "react";
-import type { RcFile, UploadProps } from 'antd/es/upload';
-import type { UploadChangeParam, UploadFile } from 'antd/es/upload/interface';
+import { useEffect, useState } from "react";
+import type { RcFile, UploadProps } from "antd/es/upload";
+import type { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import { Form, message } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import { TourFormProps } from ".";
 
-
 export interface TourValues {
-    id?: string;
-    title: string;
-    description: string;
-    price: number;
-    start_date: Dayjs | null;
-    end_date: Dayjs | null;
-    image_url?: string;
+  id?: string;
+  title: string;
+  description: string;
+  price: number;
+  start_date: Dayjs | null;
+  end_date: Dayjs | null;
+  image_url?: string;
 }
 
-
-const useTourFormLogic = ({onSubmit, initialValues}: TourFormProps) => {
+const useTourFormLogic = ({ onSubmit, initialValues }: TourFormProps) => {
   const [form] = Form.useForm<TourValues>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [imageUrl, setImageUrl] = useState<string | undefined>(
-    initialValues?.image_url
+    initialValues?.image_url,
   );
 
   const normFile = (e: UploadChangeParam): UploadFile[] | undefined => {
@@ -80,14 +78,13 @@ const useTourFormLogic = ({onSubmit, initialValues}: TourFormProps) => {
     }
   }, [form, initialValues, setImageUrl]);
 
-
   return {
     imageUrl,
     normFile,
     handleBeforeUpload,
     handleUploadChange,
     handleSubmit,
-    form
+    form,
   };
 };
 
