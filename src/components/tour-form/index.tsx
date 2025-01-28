@@ -9,11 +9,12 @@ import {
   Image,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import useTourFormLogic, { TourValues } from "./useTourFormLogic";
+import useTourFormLogic from "./hook/useTourFormLogic";
+import { TourData } from "../../types/Tour/index.types";
 
 export interface TourFormProps {
-  onSubmit: (values: TourValues, image?: File) => void;
-  initialValues?: TourValues;
+  onSubmit: (values: TourData, image?: File) => Promise<void>;
+  initialValues?: TourData;
   loading?: boolean;
 }
 

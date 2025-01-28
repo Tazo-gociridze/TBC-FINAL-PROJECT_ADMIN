@@ -1,69 +1,70 @@
-import React from 'react';
-import { Table, Button, Space, Spin } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import type { Dayjs } from 'dayjs';
+import React from "react";
+import { Table, Button, Space, Spin } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import { TourData } from "../../pages/tours-admin-panel/hooks/useToursAdminPanelLogic";
 
-interface TourValues {
-  id?: string;
-  title: string;
-  description: string;
-  price: number;
-  start_date: Dayjs | null;
-  end_date: Dayjs | null;
-  image_url?: string;
-}
 
 interface TourListProps {
-  tours: TourValues[];
-  onEdit: (tour: TourValues) => void;
+  tours: TourData[] | undefined;
+  onEdit: (tour: TourData) => void;
   onDelete: (id: string) => void;
   loading: boolean;
 }
 
-const TourList: React.FC<TourListProps> = ({
+const TourList: React.FC<TourListProps> = React.memo(({
   tours,
   onEdit,
   onDelete,
   loading,
 }) => {
-  const columns: ColumnsType<TourValues> = [
+  const columns: ColumnsType<TourData> = [
     {
       title: "Title",
       dataIndex: "title",
       key: "title",
-      width: 150, 
+      width: 150,
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
       render: (text) => <div className="line-clamp-4 text-wrap">{text}</div>,
-      responsive: ['md']
+      responsive: ["md"],
     },
     {
       title: "Price",
       dataIndex: "price",
       key: "price",
       width: 100,
-      responsive: ['lg'] 
+      responsive: ["lg"],
     },
     {
       title: "Start Date",
       dataIndex: "start_date",
       key: "start_date",
-      render: (date) => date?.toDate().toLocaleDateString(),
+       render: (date: Date | null | undefined) => {
+              if (date instanceof Date) {
+                  return date.toLocaleDateString();
+              }
+              return 'N/A';
+       },
     },
     {
       title: "End Date",
       dataIndex: "end_date",
       key: "end_date",
-      render: (date) => date?.toDate().toLocaleDateString(),
-      responsive: ['md'] 
+       render: (date: Date | null | undefined) => {
+           if (date instanceof Date) {
+               return date.toLocaleDateString();
+           }
+           return 'N/A'
+       },
+      responsive: ["md"],
     },
     {
       title: "Action",
       key: "action",
-        width: 200,
+      width: 200,
       render: (_, record) => (
         <Space size="middle">
           <Button type="primary" onClick={() => onEdit(record)}>
@@ -87,10 +88,10 @@ const TourList: React.FC<TourListProps> = ({
         columns={columns}
         dataSource={tours}
         rowKey="id"
-         scroll={{ x: true }}
+        scroll={{ x: true }}
       />
     </Spin>
   );
-};
+});
 
 export default TourList;

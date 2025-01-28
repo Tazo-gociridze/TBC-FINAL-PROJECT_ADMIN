@@ -2,21 +2,14 @@ import { useEffect, useState } from "react";
 import type { RcFile, UploadProps } from "antd/es/upload";
 import type { UploadChangeParam, UploadFile } from "antd/es/upload/interface";
 import { Form, message } from "antd";
-import dayjs, { Dayjs } from "dayjs";
-import { TourFormProps } from ".";
+import dayjs from "dayjs";
+import { TourFormProps } from "..";
+import { TourData } from "../../../types/Tour/index.types";
 
-export interface TourValues {
-  id?: string;
-  title: string;
-  description: string;
-  price: number;
-  start_date: Dayjs | null;
-  end_date: Dayjs | null;
-  image_url?: string;
-}
 
 const useTourFormLogic = ({ onSubmit, initialValues }: TourFormProps) => {
-  const [form] = Form.useForm<TourValues>();
+
+  const [form] = Form.useForm<TourData>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [imageUrl, setImageUrl] = useState<string | undefined>(
     initialValues?.image_url,
