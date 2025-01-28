@@ -1,4 +1,3 @@
-
 import { supabase } from "../lib/supabaseClient";
 import { TourData } from "../types/Tour/index.types";
 

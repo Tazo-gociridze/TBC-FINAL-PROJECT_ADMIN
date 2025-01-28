@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Button, Space, Spin } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { TourData } from "../../pages/tours-admin-panel/hooks/useToursAdminPanelLogic";
+import { TourData } from "../../types/Tour/index.types";
 
 
 interface TourListProps {
